@@ -69,44 +69,71 @@ bot.onText(/\/balance/, (msg) => {
         return bot.sendMessage(chatId, `Tu balance actual es de Bs${balance.toFixed(2)}`);
       })
       .catch(error => console.error('Error al calcular balance:', error));
+}); // Esta es la llave de cierre que estaba mal colocada
 
-      bot.onText(/\/descargarresume/, (msg) => {
-        const chatId = msg.chat.id;
-        console.log(`Solicitud de descarga de resumen: Usuario ${chatId}`);
-    
-        ref.once('value')
-            .then(snapshot => {
-                let resumen = 'Resumen de Finanzas:\n\n';
-                snapshot.forEach(childSnapshot => {
-                    const registro = childSnapshot.val();
-                    resumen += `Tipo: ${registro.tipo}, Monto: ${registro.monto}, Fecha: ${registro.fecha}\n`;
-                });
-    
-                const filePath = path.join(__dirname, 'resumen.txt');
-                fs.writeFile(filePath, resumen, (err) => {
-                    if (err) {
-                        console.error('Error al escribir el archivo de resumen:', err);
-                        return bot.sendMessage(chatId, 'Error al generar el resumen.');
-                    }
-    
-                    console.log('Resumen generado y guardado en archivo.');
-                    bot.sendDocument(chatId, filePath)
-                        .then(() => {
-                            console.log('Resumen enviado al usuario.');
-                            // Eliminar el archivo después de enviarlo
-                            fs.unlink(filePath, (err) => {
-                                if (err) console.error('Error al eliminar el archivo de resumen:', err);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error al enviar el resumen:', error);
-                            bot.sendMessage(chatId, 'Error al enviar el resumen.');
-                        });
-                });
-            })
-            .catch(error => {
-                console.error('Error al obtener datos para el resumen:', error);
-                bot.sendMessage(chatId, 'Error al obtener datos para el resumen.');
+bot.onText(/\/descargarresume/, (msg) => {
+    const chatId = msg.chat.id;
+    console.log(`Solicitud de descarga de resumen: Usuario ${chatId}`);
+
+    ref.once('value')
+        .then(snapshot => {
+            let resumen = 'Resumen de Finanzas:\n\n';
+            snapshot.forEach(childSnapshot => {
+                const registro = childSnapshot.val();
+                resumen += `Tipo: ${registro.tipo}, Monto: ${registro.monto}, Fecha: ${registro.fecha}\n`;
             });
-    });
+
+            const filePath = path.join(__dirname, 'resumen.txt');
+            fs.writeFile(filePath, resumen, (err) => {
+                if (err) {
+                    console.error('Error al escribir el archivo de resumen:', err);
+                    return bot.sendMessage(chatId, 'Error al generar el resumen.');
+                }
+
+                console.log('Resumen generado y guardado en archivo.');
+                bot.sendDocument(chatId, filePath)
+                    .then(() => {
+                        console.log('Resumen enviado al usuario.');
+                        // Eliminar el archivo después de enviarlo
+                        fs.unlink(filePath, (err) => {
+                            if (err) console.error('Error al eliminar el archivo de resumen:', err);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar el resumen:', error);
+                        bot.sendMessage(chatId, 'Error al enviar el resumen.');
+                    });
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener datos para el resumen:', error);
+            bot.sendMessage(chatId, 'Error al obtener datos para el resumen.');
+        });
+});
+
+bot.onText(/\/resumen/, (msg) => {
+    const chatId = msg.chat.id;
+    console.log(`Solicitud de resumen: Usuario ${chatId}`);
+
+    ref.once('value')
+        .then(snapshot => {
+            let ingresos = 0;
+            let egresos = 0;
+            snapshot.forEach(childSnapshot => {
+                const registro = childSnapshot.val();
+                if (registro.tipo === 'ingreso') {
+                    ingresos += registro.monto;
+                } else if (registro.tipo === 'egreso') {
+                    egresos += registro.monto;
+                }
+            });
+            const balance = ingresos - egresos;
+            const mensajeResumen = `Resumen de Finanzas:\nIngresos: Bs${ingresos.toFixed(2)}\nEgresos: Bs${egresos.toFixed(2)}\nBalance Total: Bs${balance.toFixed(2)}`;
+            console.log(mensajeResumen);
+            return bot.sendMessage(chatId, mensajeResumen);
+        })
+        .catch(error => {
+            console.error('Error al obtener datos para el resumen:', error);
+            bot.sendMessage(chatId, 'Error al obtener datos para el resumen.');
+        });
 });
