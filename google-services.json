@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "306570664024",
+    "firebase_url": "https://fir-login2-c7a59-default-rtdb.firebaseio.com",
+    "project_id": "fir-login2-c7a59",
+    "storage_bucket": "fir-login2-c7a59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306570664024:android:3b7152b52a1dbc691a522d",
+        "android_client_info": {
+          "package_name": "chakuy.emerbo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306570664024-00iob1u71hdruddv54eevqfv9fi3ldvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOjSCE0nK8peMFZGQ5cLXRgKfBe_41dMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306570664024-00iob1u71hdruddv54eevqfv9fi3ldvv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306570664024:android:9e78ff1f580738661a522d",
+        "android_client_info": {
+          "package_name": "com.example.mtp11"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306570664024-00iob1u71hdruddv54eevqfv9fi3ldvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOjSCE0nK8peMFZGQ5cLXRgKfBe_41dMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306570664024-00iob1u71hdruddv54eevqfv9fi3ldvv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306570664024:android:bc9a57259059c7c01a522d",
+        "android_client_info": {
+          "package_name": "org.chakuy.chakuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306570664024-00iob1u71hdruddv54eevqfv9fi3ldvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOjSCE0nK8peMFZGQ5cLXRgKfBe_41dMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306570664024-00iob1u71hdruddv54eevqfv9fi3ldvv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
